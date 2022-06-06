@@ -1,0 +1,11 @@
+@page "/configuration/{clientId}"
+@inject NavigationManager Navigation
+
+@code {
+    
+    protected override void OnInitialized()
+    {
+        Navigation.NavigateTo($"_content/AuthLib/authentication/configuration.json");
+    }
+
+}

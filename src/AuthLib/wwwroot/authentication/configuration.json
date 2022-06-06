@@ -1,0 +1,6 @@
+{
+  "authority": "local.auth.io",
+  "client_id": "local.client.id",
+  "response_type" : "id_token"
+  
+} 

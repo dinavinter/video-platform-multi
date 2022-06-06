@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+<PropertyGroup>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishTrimmed>true</PublishTrimmed>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <PublishReadyToRunShowWarnings>true</PublishReadyToRunShowWarnings>
+
+</PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
+        <PackageReference Include="Blazored.Video" Version="1.0.0" />
+         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.4" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.4" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.4" />
+        <PackageReference Include="Radzen.Blazor" Version="3.2.7" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.10.2" /> 
+<!--         <PackageReference Include="System.Net.Http.Json" Version="3.2.0" />-->
+        <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+        <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Auth\Auth.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\video" />
+    </ItemGroup>
+
+<!--    <ItemGroup>-->
+<!--      <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">-->
+<!--        <HintPath>..\..\..\..\.nuget\packages\microsoft.identitymodel.tokens\6.7.1\lib\netstandard2.0\Microsoft.IdentityModel.Tokens.dll</HintPath>-->
+<!--      </Reference>-->
+<!--      <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">-->
+<!--        <HintPath>..\..\..\..\.nuget\packages\system.identitymodel.tokens.jwt\6.7.1\lib\netstandard2.0\System.IdentityModel.Tokens.Jwt.dll</HintPath>-->
+<!--      </Reference>-->
+<!--    </ItemGroup>-->
+
+</Project>

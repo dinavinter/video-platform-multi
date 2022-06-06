@@ -1,0 +1,82 @@
+﻿@page "/streamer"
+@page "/streamer/{Source}/{Type}"
+@page "/streamer/{Source}"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+ 
+<style>
+    .flash0 {
+        animation: FLASH0 200ms ease-in-out;
+    }
+
+    .flash1 {
+        animation: FLASH1 200ms ease-in-out;
+    }
+
+    @@keyframes FLASH0 {
+        0% {
+            background-color: rgba(255, 216, 0, 0.8);
+        }
+
+        100% {
+            background-color: rgba(255, 216, 0, 0);
+        }
+    }
+
+    @@keyframes FLASH1 {
+        0% {
+            background-color: rgba(255, 216, 0, 0.8);
+        }
+
+        100% {
+            background-color: rgba(255, 216, 0, 0);
+        }
+    }
+</style>
+
+@* <AuthorizeView Resource="@Source"> *@
+    <div class="d-flex align-items-start justify-content-center"> 
+        @* <StreamerDiagnostic EventCounter="@eventCounter" VideoState="@videoState"  ></StreamerDiagnostic> *@
+            <BlazoredVideo TimeUpdateEvent="OnEvent"
+                    VideoEventOptions="options"
+                    class="w-100"
+                    style="max-width:1000px;"
+                    controls="controls">
+                @* <source src="https://res.cloudinary.com/blazoredgitter/video/upload/v1557015491/samples/elephants.mp4" type="video/mp4" /> *@
+                <source src="/video/@Source" type="@Type" />
+            </BlazoredVideo>
+    
+    </div>
+@* </AuthorizeView> *@
+
+
+@code {
+
+    [Parameter]
+    public string Source { get; set; } = "1.mp4";
+    
+    [Parameter] 
+    public string Type { get; set; } = "video/mp4";
+    
+    Dictionary<VideoEvents, VideoStateOptions> options = new Dictionary<VideoEvents, VideoStateOptions>();
+    VideoState videoState;
+    Dictionary<VideoEvents, int> eventCounter = new Dictionary<VideoEvents, int>();
+
+    protected override void OnInitialized()
+    {
+        foreach (var item in (VideoEvents[])(Enum.GetValues(typeof(VideoEvents))))
+        {
+            if (item != VideoEvents.NotSet)
+            {
+                eventCounter[item] = 0;
+            }
+        }
+        options[VideoEvents.TimeUpdate] = new VideoStateOptions { CurrentTime = true };
+    }
+    void OnEvent(VideoState state)
+    {
+        videoState = state;
+        eventCounter[VideoEvents.TimeUpdate]++;
+    }
+}

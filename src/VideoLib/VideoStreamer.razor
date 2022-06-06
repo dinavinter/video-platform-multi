@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Authorization
+
+ 
+<style>
+    .flash0 {
+        animation: FLASH0 200ms ease-in-out;
+    }
+
+    .flash1 {
+        animation: FLASH1 200ms ease-in-out;
+    }
+
+    @@keyframes FLASH0 {
+        0% {
+            background-color: rgba(255, 216, 0, 0.8);
+        }
+
+        100% {
+            background-color: rgba(255, 216, 0, 0);
+        }
+    }
+
+    @@keyframes FLASH1 {
+        0% {
+            background-color: rgba(255, 216, 0, 0.8);
+        }
+
+        100% {
+            background-color: rgba(255, 216, 0, 0);
+        }
+    }
+</style>
+
+    <div class="d-flex align-items-start justify-content-center"> 
+        @* <StreamerDiagnostic EventCounter="@eventCounter" VideoState="@videoState"  ></StreamerDiagnostic> *@
+            <BlazoredVideo  
+                    class="w-100"
+                    style="max-width:1000px;"
+                    controls="controls">
+                @* <source src="https://res.cloudinary.com/blazoredgitter/video/upload/v1557015491/samples/elephants.mp4" type="video/mp4" /> *@
+                <source src="/video/@Source" type="@Type" />
+            </BlazoredVideo>
+    
+    </div>
+ 
+
+@code {
+
+    [Parameter]
+    public string Source { get; set; } = "1.mp4";
+    
+    [Parameter] 
+    public string Type { get; set; } = "video/mp4";
+    
+ 
+ 
+}

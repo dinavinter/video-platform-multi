@@ -1,0 +1,46 @@
+@using System.ComponentModel.DataAnnotations
+@using global::Auth
+@using System.ComponentModel
+@inject IAccountService AccountService; 
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+@inject IJSRuntime jsr
+
+<div>
+    <div class="form-group">
+        <label for="inputEmail">Device Id</label>
+        <input type="email" class="form-control" id="inputEmail" @bind="@DeviceId"/>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword">Code</label>
+        <input type="password" class="form-control" id="inputPassword" @bind="@Code"/>
+    </div>
+    <button type="button" class="btn btn-primary" @onclick="LoginAsync">Login</button>
+</div>
+
+@code {
+
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationState { get; set; }
+
+    [Parameter]
+    public string DeviceId { get; set; }
+
+    [Parameter, DefaultValue("1.mp4")]
+    public string Video { get; set; } = "1.mp4";
+ 
+    private string Code { get; set; }
+
+
+    private async Task LoginAsync()
+    {
+        await AccountService.LoginAsync(DeviceId, Code, Video);
+                    
+    // if (result.success)
+    //    await jsr.InvokeVoidAsync("localStorage.setItem", "user", $"{result.email};{result.jwtBearer}").ConfigureAwait(false);
+        }
+
+    // return AccountService.LoginAsync(DeviceId, Code);
+    }
+
+}

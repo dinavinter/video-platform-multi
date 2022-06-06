@@ -1,0 +1,24 @@
+@page "/video"
+@page "/video/{Source}/{Type}"
+@page "/video/{Source}"
+
+<AuthorizeView Resource="@Source">
+    <Authorized>
+        <VideoStreamer Source="@Source" Type="@Type"></VideoStreamer>
+    </Authorized>
+    <NotAuthorized>
+         <Login Video="@Source" DeviceId="12"></Login> 
+    </NotAuthorized>
+</AuthorizeView>
+ 
+
+
+@code {
+
+    [Parameter]
+    public string Source { get; set; } = "1.mp4";
+
+    [Parameter]
+    public string Type { get; set; } = "video/mp4";
+
+}

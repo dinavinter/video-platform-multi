@@ -1,0 +1,45 @@
+   <div >
+        <div class="d-flex flex-column w-100 p-2">
+                    <div class="alert-primary">Events</div>
+                    <div class="d-flex p-1 m-1 flex-wrap">
+                        @foreach (var eventName in Enum.GetNames(typeof(VideoEvents)))
+                        {
+                            var eventValue = (VideoEvents)Enum.Parse(typeof(VideoEvents), eventName);
+                            if (EventCounter.ContainsKey(eventValue))
+                            {
+                                <div class="d-flex flex-column m-1 p-1 border border-dark">
+                                    <label class="bg-dark text-white p-1">@eventName</label>
+                                    <span class="flash@(EventCounter[eventValue] % 2)">@EventCounter[eventValue]</span>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+         <div class="d-flex flex-column w-100 p-2">
+             <div class="alert-primary">State</div>
+             <div class="d-flex p-1 m-1 flex-wrap">
+                 @if (VideoState is object)
+                 {
+                     foreach (var item in typeof(VideoState).GetProperties())
+                     {
+                         try
+                         {
+                             <div class="d-flex flex-column m-1 p-1 border border-dark">
+                                 <label class="bg-dark text-white p-1">@item.Name</label>
+                                 <span>@item.GetValue(VideoState)?.ToString()</span>
+                             </div>
+                         }
+                         catch { }
+                     }
+                 }
+             </div>
+         </div>
+     </div>
+ @code {
+     
+     [Parameter]
+    public Dictionary<VideoEvents, int> EventCounter { get; set; } = new Dictionary<VideoEvents, int>();
+     [Parameter]
+    public VideoState VideoState { get; set; }
+
+}

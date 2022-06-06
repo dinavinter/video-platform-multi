@@ -1,0 +1,41 @@
+@using VideoStreamer.Pages 
+@using System.Web
+
+<RadzenFieldset Collapsed="@(Video == null)" AllowCollapse="true" Text="@(Video.Title)">
+
+
+    <div class="row">
+        <RadzenLabel Text="@Video.Title"/>
+    </div>
+
+    <div class="row">
+        <RadzenLabel Text="Code: "/>
+        <RadzenLabel Text="@Video.Code"/>
+    </div>
+
+
+    <div class="row">
+
+        <RadzenLink Path="@StreamingUrl" Text="Watch"/>
+
+    </div>
+</RadzenFieldset>
+
+
+@code
+{
+    [Parameter]
+    public VideoItem Video { get; set; }
+
+    private string StreamingUrl => $"streamer/{HttpUtility.UrlEncode(Video.Video)}/{HttpUtility.UrlEncode(Video.Type)}";
+
+
+    public class VideoItem
+    {
+        public string Title { get; set; }
+        public string Video { get; set; }
+        public string Code { get; set; }
+        public string Type { get; set; } = "video/mp4";
+    }
+
+}

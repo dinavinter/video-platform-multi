@@ -1,0 +1,37 @@
+﻿@using System.Net.Http
+@using System.Net.Http.Json
+@using System.ComponentModel
+@inject HttpClient Http
+
+<h1>Video Catalog</h1>
+
+
+@if (_videoItems == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    @foreach (var videoItem in _videoItems)
+    {
+        <VideoCatalogItem Video="@videoItem" />
+    }
+ 
+}
+
+@code {
+    private VideoCatalogItem.VideoItem[] _videoItems;
+
+    [Parameter, DefaultValue("_content/VideoLib/sample-data/catalog.json")]
+    public string Source { get; set; } = "_content/VideoLib/sample-data/catalog.json";
+
+    protected override async Task OnInitializedAsync()
+    {
+        _videoItems = await Http.GetFromJsonAsync<VideoCatalogItem.VideoItem[]>(Source);
+    }
+//https://community.devexpress.com/blogs/aspnet/archive/2019/07/12/asp-net-core-file-manager-thumbnail-generator-service.aspx
+
+
+}

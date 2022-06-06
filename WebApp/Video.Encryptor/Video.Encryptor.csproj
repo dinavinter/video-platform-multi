@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <PublishedTrimmed>false</PublishedTrimmed>
+        <PublishReadyToRun>true</PublishReadyToRun>
+        <PublishSingleFile>true</PublishSingleFile>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Componnets" />
+    </ItemGroup>
+
+</Project>
